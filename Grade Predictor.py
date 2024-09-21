@@ -4,13 +4,16 @@ import sklearn
 from sklearn import linear_model
 import matplotlib.pyplot as pyplot
 import pickle
-from tkinter import *
+from customtkinter import *
 
 def Predict():
     userInputs = [[int(Input_G1.get()),int(Input_G2.get()),int(Input_Age.get()),int(Input_Medu.get()),int(Input_Fedu.get()),int(Input_Study.get()),int(Input_Fail.get()),
                    int(Input_Famrel.get()),int(Input_Walc.get()),int(Input_Health.get())]]
     prediction = model.predict(userInputs)
+    Output_text.configure(state="normal")
+    Output_text.delete(1.0, END)
     Output_text.insert(END, round(prediction[0],2))
+    Output_text.configure(state="disabled")
 
 
 
@@ -58,63 +61,63 @@ score = model.score(x_test,y_test)
 
 
 ###Create tkinter object
-root = Tk()
-root['bg'] = 'forest green'
+root = CTk()
+set_appearance_mode("dark")
 root.geometry('1100x500')
 root.resizable(True,True)
 root.title("Grade Predictor")
 
 ##General labels
-Label(root, text="Grade Predictor", font='Arial 20 bold', bg='light green').pack()
-Label(root, text="Input Your Information Here", font='Arial 15 bold', bg='light green').place(x=165,y=90)
-Label(root, text="Predicted Period 3 Grade", font='Arial 15 bold', bg='light green').place(x=715, y = 90)
+CTkLabel(root, text="Grade Predictor", font = ('Arial',50,"bold")).pack()
+CTkLabel(root, text="Input Your Information Here", font = ('Arial',30,"bold")).place(x=115,y=90)
+CTkLabel(root, text="Predicted Period 3 Grade", font = ('Arial',30,"bold")).place(x=715, y = 90)
 
 ##Label pointing to student.txt for more information on variables
-Label(root, text = "*Go to student.txt for more\n "
+CTkLabel(root, text = "*Go to student.txt for more\n "
                    "information on variables and scoring system*",
-      font = 'Arial 10 bold italic', bg='forest green').place(x=0,y=0)
+      font = ('Arial',10)).place(x=0,y=0)
 
 ##Labels for each variable
-Label(root, text="first period score (1-20)", font = 'Arial 10 bold', bg='light green').place(x=70, y = 145)
-Label(root, text="second period score (1-20)", font = 'Arial 10 bold', bg='light green').place(x=350, y = 145)
-Label(root, text="mother's education level (1-4)", font = 'Arial 10 bold', bg='light green').place(x=70, y = 215)
-Label(root, text="father's education level (1-4)", font = 'Arial 10 bold', bg='light green').place(x=350, y = 215)
-Label(root, text="weekly study time (1-4)", font = 'Arial 10 bold', bg='light green').place(x=70, y=285)
-Label(root, text="number of past class failures (0-4)", font = 'Arial 10 bold', bg='light green').place(x=350, y=285)
-Label(root, text="quality of family relations (1-5)", font = 'Arial 10 bold', bg='light green').place(x=70, y=355)
-Label(root, text="weekend alcohol consumption (1-5)", font = 'Arial 10 bold', bg='light green').place(x=350, y=355)
-Label(root, text="current health status (1-5)", font = 'Arial 10 bold', bg='light green').place(x=70, y=425)
-Label(root, text="current age (15-22)", font = 'Arial 10 bold', bg='light green').place(x=350, y=425)
+CTkLabel(root, text="First Period Score (1-20)", font = ('Arial',18)).place(x=70, y = 145)
+CTkLabel(root, text="Second Period Score (1-20)", font = ('Arial',18)).place(x=350, y = 145)
+CTkLabel(root, text="Mother's Education Level (1-4)", font = ('Arial',18)).place(x=70, y = 215)
+CTkLabel(root, text="Father's Education Level (1-4)", font = ('Arial',18)).place(x=350, y = 215)
+CTkLabel(root, text="Weekly Study time (1-4)", font = ('Arial',18)).place(x=70, y=285)
+CTkLabel(root, text="Number of Past Class Failures (0-4)",font = ('Arial',18)).place(x=350, y=285)
+CTkLabel(root, text="Quality of Family Relations (1-5)", font = ('Arial',18)).place(x=70, y=355)
+CTkLabel(root, text="Weekend Alcohol Consumption (1-5)", font = ('Arial',18)).place(x=350, y=355)
+CTkLabel(root, text="Current Health Status (1-5)", font = ('Arial',18)).place(x=70, y=425)
+CTkLabel(root, text="Current Age (15-22)", font = ('Arial',18)).place(x=350, y=425)
 
 
 ##Input boxes for each variable
-Input_G1 = Entry(root, border = 3, width = 23)
+Input_G1 = CTkEntry(root, width = 100)
 Input_G1.place(x = 70, y=170)
-Input_G2 = Entry(root, border=3, width=23)
+Input_G2 = CTkEntry(root, width = 100)
 Input_G2.place(x = 350, y = 170)
-Input_Medu = Entry(root, border = 3, width = 23)
+Input_Medu = CTkEntry(root, width = 100)
 Input_Medu.place(x = 70, y = 240)
-Input_Fedu = Entry(root, border = 3, width = 23)
+Input_Fedu = CTkEntry(root, width = 100)
 Input_Fedu.place(x = 350, y = 240)
-Input_Study = Entry(root, border = 3, width = 23)
+Input_Study = CTkEntry(root, width = 100)
 Input_Study.place(x = 70, y = 310)
-Input_Fail = Entry(root, border = 3, width = 23)
+Input_Fail = CTkEntry(root, width = 100)
 Input_Fail.place(x = 350, y = 310)
-Input_Famrel = Entry(root, border = 3, width = 23)
+Input_Famrel = CTkEntry(root, width = 100)
 Input_Famrel.place(x = 70, y = 380)
-Input_Walc = Entry(root, border = 3, width = 23)
+Input_Walc = CTkEntry(root, width = 100)
 Input_Walc.place(x = 350, y = 380)
-Input_Health = Entry(root, border = 3, width = 23)
+Input_Health = CTkEntry(root, width = 100)
 Input_Health.place(x = 70, y = 450)
-Input_Age = Entry(root, border = 3, width = 23)
+Input_Age = CTkEntry(root, width = 100)
 Input_Age.place(x=350, y=450)
 
 
-Output_text = Text(root, font='arial 10', height=5, wrap=WORD, padx=5, pady=5, border = 3, width=33)
-Output_text.place(x=715, y=130)
+Output_text = CTkTextbox(root, font=("Arial",50), height=5, wrap=WORD, padx=5, pady=5, width=245, corner_radius = 20, state="disabled")
+Output_text.place(x=772, y=130)
 
-button = Button(root, text = "Generate Prediction", font = "arial 13 bold", command=Predict)
-button.place(x=750, y = 250)
+button = CTkButton(root, text = "Generate Prediction", font=("Arial",20), fg_color = "purple",command=Predict, corner_radius = 10)
+button.place(x=795, y = 250)
 
 
 root.mainloop()
